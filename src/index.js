@@ -23,7 +23,15 @@ function checksExistsUserAccount(request, response, next) {
 }
 
 function checksCreateTodosUserAvailability(request, response, next) {
-  // Complete aqui
+  const { user } = request;
+
+  if (!user.pro && user.todos.length >= 10) {
+    return response
+      .status(403)
+      .json({ error: 'Exceeded todo limit in free plan' });
+  }
+
+  next();
 }
 
 function checksTodoExists(request, response, next) {
