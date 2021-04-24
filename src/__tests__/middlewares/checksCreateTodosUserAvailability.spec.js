@@ -1,9 +1,7 @@
 const { v4 } = require('uuid');
 
-const {
-  users,
-  checksCreateTodosUserAvailability
-} = require('../../');
+// pega o index.js da pasta root
+const { users, checksCreateTodosUserAvailability } = require('../../');
 
 let response;
 let request;
@@ -15,25 +13,25 @@ describe('checksCreateTodosUserAvailability', () => {
 
     request = (params) => {
       return {
-        ...params
-      }
+        ...params,
+      };
     };
 
     response = () => {
-      const response = {}
+      const response = {};
 
       response.status = jest.fn((code) => {
         return {
           ...response,
-          statusCode: code
-        }
+          statusCode: code,
+        };
       });
 
       response.json = jest.fn((obj) => {
         return {
           ...response,
-          body: obj
-        }
+          body: obj,
+        };
       });
 
       return response;
@@ -49,8 +47,8 @@ describe('checksCreateTodosUserAvailability', () => {
         name: 'Atlas',
         username: 'atlas',
         pro: false,
-        todos: []
-      }
+        todos: [],
+      },
     });
 
     const mockResponse = response();
@@ -72,9 +70,9 @@ describe('checksCreateTodosUserAvailability', () => {
           title: 'Todo',
           deadline: new Date(),
           done: false,
-          created_at: new Date()
-        }))
-      }
+          created_at: new Date(),
+        })),
+      },
     });
 
     const mockResponse = response();
@@ -96,9 +94,9 @@ describe('checksCreateTodosUserAvailability', () => {
           title: 'Todo',
           deadline: new Date(),
           done: false,
-          created_at: new Date()
+          created_at: new Date(),
         })),
-      }
+      },
     });
 
     const mockResponse = response();
@@ -107,4 +105,4 @@ describe('checksCreateTodosUserAvailability', () => {
 
     expect(mockNext).toBeCalled();
   });
-})
+});
